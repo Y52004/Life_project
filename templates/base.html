@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Expectancy Predictor</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-top: 20px;
+            padding: 30px;
+        }
+        .form-control {
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        h1 {
+            color: #333;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">🌍 Life Expectancy Predictor</h1>
+        
+        <form method="POST" action="/predict">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Adult Mortality (per 1000)</label>
+                    <input type="number" step="0.01" class="form-control" name="adult_mortality" value="200" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Infant Deaths</label>
+                    <input type="number" step="0.01" class="form-control" name="infant_deaths" value="50" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Alcohol Consumption</label>
+                    <input type="number" step="0.01" class="form-control" name="alcohol" value="5.0" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Health Expenditure (%)</label>
+                    <input type="number" step="0.01" class="form-control" name="percentage_expenditure" value="1000" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Hepatitis B (%)</label>
+                    <input type="number" step="0.01" class="form-control" name="hepatitis_b" value="85" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Measles Cases</label>
+                    <input type="number" step="0.01" class="form-control" name="measles" value="100" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">BMI</label>
+                    <input type="number" step="0.01" class="form-control" name="bmi" value="25.0" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Under-Five Deaths</label>
+                    <input type="number" step="0.01" class="form-control" name="under_five_deaths" value="60" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Polio (%)</label>
+                    <input type="number" step="0.01" class="form-control" name="polio" value="85" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Total Health Expenditure (%)</label>
+                    <input type="number" step="0.01" class="form-control" name="total_expenditure" value="7.0" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Diphtheria (%)</label>
+                    <input type="number" step="0.01" class="form-control" name="diphtheria" value="85" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">HIV/AIDS (per 1000)</label>
+                    <input type="number" step="0.01" class="form-control" name="hiv_aids" value="2.0" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">GDP (USD)</label>
+                    <input type="number" step="0.01" class="form-control" name="gdp" value="5000" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Population</label>
+                    <input type="number" step="0.01" class="form-control" name="population" value="10000000" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Thinness 1-19 years (%)</label>
+                    <input type="number" step="0.01" class="form-control" name="thinness_1_19" value="5.0" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Thinness 5-9 years (%)</label>
+                    <input type="number" step="0.01" class="form-control" name="thinness_5_9" value="5.0" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Income Composition (0-1)</label>
+                    <input type="number" step="0.01" class="form-control" name="income_composition" value="0.7" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Schooling (years)</label>
+                    <input type="number" step="0.01" class="form-control" name="schooling" value="12" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Country Status</label>
+                    <select class="form-control" name="status" required>
+                        <option value="Developed">Developed</option>
+                        <option value="Developing" selected>Developing</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    🔮 Predict Life Expectancy
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
